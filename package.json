@@ -1,6 +1,7 @@
 {
-  "author": "Felix Geisendörfer <felix@debuggable.com> (http://debuggable.com/)",
+  "author": "Airbrake Technologies, Inc.",
   "contributors": [
+    "Felix Geisendörfer <felix@debuggable.com> (http://debuggable.com/)",
     "László Bácsi <lackac@lackac.hu> (http://lackac.hu)",
     "Carlos Brito Lage <carlos@carloslage.net> (http://carloslage.net)",
     "Stephen Celis <me@stephencelis.com> (http://stephencelis.com)",
@@ -16,32 +17,41 @@
     "Johnny Halife <johnny.halife@me.com> (http://johnny.io)"
   ],
   "name": "airbrake",
-  "description": "Node.js client for airbrake.io",
-  "version": "0.3.8",
-  "homepage": "https://github.com/felixge/node-airbrake",
+  "description": "A Node.js notifier for Airbrake, the leading exception reporting service.",
+  "version": "1.1.0",
+  "homepage": "https://github.com/airbrake/node-airbrake",
   "repository": {
     "type": "git",
-    "url": "git://github.com/felixge/node-airbrake.git"
+    "url": "git://github.com/airbrake/node-airbrake.git"
   },
   "main": "./index",
   "engines": {
     "node": "*"
   },
   "scripts": {
-    "test": "test/run.js"
+    "lint": "eslint .",
+    "test": "nsp check && test/run.js",
+    "posttest": "npm run lint"
   },
   "dependencies": {
-    "request": "~2.40.0",
-    "xmlbuilder": "~0.4.2",
+    "json-stringify-safe": "~5.0.0",
+    "lodash.merge": "^4.4.0",
+    "request": "~2.74.0",
     "stack-trace": "~0.0.6",
-    "hashish": "~0.0.4"
+    "sync-exec": "^0.6.2"
   },
   "devDependencies": {
-    "sinon": "~1.7.2",
+    "eslint": "~2.8.0",
+    "eslint-config-airbnb-base": "~1.0.3",
+    "eslint-plugin-import": "~1.6.1",
+    "express": "~4.13.4",
     "far": "~0.0.4",
-    "express": "~2.5.10",
+    "hapi": "~13.5.0",
     "mockery": "~1.4.0",
-    "semver": "*"
+    "nock": "^8.0.0",
+    "nsp": "~2.2.0",
+    "semver": "~5.3.0",
+    "sinon": "~1.7.2"
   },
   "optionalDependencies": {},
   "license": "MIT"

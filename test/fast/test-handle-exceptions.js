@@ -39,7 +39,7 @@ var sinon = require('sinon');
 
     process.exit.restore();
     airbrake.log.restore();
-  })();
+  }());
 
   (function testNotifyError() {
     sinon.stub(airbrake, 'log');
@@ -53,8 +53,30 @@ var sinon = require('sinon');
     assert.ok(process.exit.calledWith(1));
 
     process.exit.restore();
-  })();
+  }());
 
-
+  airbrake.log.restore();
+  airbrake.notify.restore();
   process.on.restore();
-})();
+}());
+
+(function testDoNotKillProcessAfterUnhandledException() {
+  sinon.stub(process, 'on');
+  sinon.stub(airbrake, 'notify');
+  sinon.stub(airbrake, 'log');
+  sinon.stub(process, 'exit');
+
+  airbrake.handleExceptions(false);
+
+  var handler = process.on.args[0][1];
+
+  var err = new Error('i am uncaught!');
+  handler(err);
+
+  assert.equal(process.exit.calledWith(1), false);
+
+  process.exit.restore();
+  airbrake.log.restore();
+  airbrake.notify.restore();
+  process.on.restore();
+}());

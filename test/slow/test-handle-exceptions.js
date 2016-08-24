@@ -1,6 +1,5 @@
 var common = require('../common');
-var airbrake = require(common.dir.root).createClient(common.key);
-var assert = require('assert');
+var airbrake = require(common.dir.root).createClient(null, common.key);
 var sinon = require('sinon');
 
 var err = new Error('test-notify');
@@ -17,4 +16,3 @@ process.on('exit', function() {
 });
 
 throw err;
-
